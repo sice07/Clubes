@@ -128,7 +128,7 @@ table.quadro{width:100%;border-collapse:collapse;font-size:14px}
 @media (prefers-reduced-motion:reduce){.abrir,.club{transition:none}}
 
 html{scroll-behavior:smooth;scroll-padding-top:76px}
-.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+.wrap{max-width:1560px;margin:0 auto;padding:0 28px}
 .top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--plane) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
 .top .wrap{display:flex;align-items:center;gap:20px;height:60px}
 .brand{display:flex;align-items:center;gap:11px;text-decoration:none;min-width:0}
@@ -213,19 +213,84 @@ h2{font-size:24px;margin:0}
 .painel h3{font-size:16px;margin:0}
 .painel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:12px}
 .grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+/* comparativo em duas colunas: quadro à esquerda, gráficos empilhados à direita */
+.duplo{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:18px;align-items:start}
+.coluna{display:flex;flex-direction:column;gap:18px;min-width:0}
+/* seleção: mapa ao lado dos escudos */
+.sel-grid{display:grid;grid-template-columns:390px minmax(0,1fr);gap:18px;align-items:stretch}
+.sel-grid>.painel{display:flex;flex-direction:column}
+.sel-grid .resumo-sel{margin-top:auto}
+
+/* mapa do Brasil com o contorno real dos estados */
+.mapa-svg{width:100%;height:auto;display:block;margin:6px 0 2px}
+path.uf{stroke:var(--border-2);stroke-width:1.1;stroke-linejoin:round;fill:var(--surface-2);transition:fill .12s,opacity .12s}
+path.uf.tem{cursor:pointer}
+path.uf.tem:hover{fill:color-mix(in srgb,var(--s4) 88%,var(--surface))}
+path.uf.fp{fill:color-mix(in srgb,var(--s4) 18%,var(--surface))}
+path.uf.f1{fill:color-mix(in srgb,var(--s4) 36%,var(--surface))}
+path.uf.f2{fill:color-mix(in srgb,var(--s4) 56%,var(--surface))}
+path.uf.f3{fill:color-mix(in srgb,var(--s4) 76%,var(--surface))}
+path.uf.sel{stroke:var(--ink);stroke-width:2.6}
+path.uf:focus-visible{outline:none;stroke:var(--ink);stroke-width:2.6}
+.uf.apaga,.rot.apaga{opacity:.3}
+.rot{pointer-events:none}
+.rot text{font:700 19px var(--sans);fill:var(--ink-2);letter-spacing:.02em}
+.rot text.claro{fill:#fff}
+.rot circle{fill:var(--ink);stroke:var(--surface);stroke-width:1.6}
+.rot text.qtd{font:700 14px var(--sans);fill:var(--surface)}
+.regioes{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
+.reg{font:inherit;font-size:12px;font-weight:600;color:var(--ink-2);background:var(--surface-2);border:1px solid var(--border);border-radius:999px;padding:5px 11px;cursor:pointer}
+.reg:hover{color:var(--ink)}
+.reg[disabled]{opacity:.45;cursor:default}
+.reg.on{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.legenda-mapa{display:flex;gap:12px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);border-top:1px solid var(--border);padding-top:10px;margin-top:6px}
+.legenda-mapa span{display:inline-flex;align-items:center;gap:6px}
+.legenda-mapa i{width:12px;height:12px;border-radius:4px;display:inline-block;border:1px solid var(--border-2)}
+
+/* grade de escudos por estado */
+.trilho{display:flex;align-items:center;gap:7px;overflow-x:auto;padding:6px 2px 12px;scrollbar-width:thin}
+.blocos-uf{display:flex;flex-wrap:wrap;gap:16px 22px;padding:4px 0 2px}
+.bloco-uf{display:flex;flex-direction:column;gap:7px}
+.bloco-uf .cab{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.bloco-uf .fila{display:flex;gap:8px;flex-wrap:wrap}
+.rank{margin-top:16px;border-top:1px solid var(--border);padding-top:14px}
+.rank h4{margin:0 0 10px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.rank-l{display:grid;grid-template-columns:52px minmax(0,1fr) 88px;gap:10px;align-items:center;margin:7px 0;font-size:12.5px}
+.rank-l b{font-weight:700;font-size:12px;letter-spacing:.02em}
+.rank-bar{height:15px;border-radius:5px;display:block;min-width:3px}
+.rank-l .v{text-align:right;color:var(--ink-2)}
+.resumo-sel{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:16px}
+.resumo-sel div{background:var(--surface);padding:12px 14px}
+.resumo-sel span{display:block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.resumo-sel strong{display:block;font-size:20px;margin-top:3px}
+.resumo-sel em{font-style:normal;font-size:12px;color:var(--ink-2)}
+
+/* painorama no topo */
+.hero-kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.hero-kpi{border:1px solid var(--border);border-radius:12px;padding:12px 14px;background:var(--surface-2)}
+.hero-kpi span{display:block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.hero-kpi strong{display:block;font-size:22px;margin-top:2px;letter-spacing:-.01em}
+.hero-kpi em{font-style:normal;font-size:12px;color:var(--ink-2)}
+
 .nota{font-size:13px;color:var(--ink-2);background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r);padding:16px 20px}
 .nota b{color:var(--ink)}
 .nota p{margin:0 0 8px}.nota p:last-child{margin:0}
 footer{padding:34px 0 40px;color:var(--muted);font-size:12.5px}
 footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;border-top:1px solid var(--border);padding-top:18px}
-@media (max-width:1080px){ .grid2{grid-template-columns:minmax(0,1fr)} }
+@media (max-width:1280px){ .duplo{grid-template-columns:minmax(0,1fr)} }
+@media (max-width:1080px){ .grid2{grid-template-columns:minmax(0,1fr)} .sel-grid{grid-template-columns:minmax(0,1fr)} }
 @media (max-width:760px){
   .wrap{padding:0 16px}
-  .hero{grid-template-columns:1fr;padding:28px 22px}
+  .hero{grid-template-columns:1fr;padding:24px 18px;gap:18px}
   .polvo{max-width:320px}
   .nav{display:none}
   .grade-box{padding:16px 14px}
   .trilho{gap:8px;margin:0 -14px;padding:6px 14px 12px}
+  .blocos-uf{gap:12px 16px}
+  .hero-kpi{padding:10px 11px}
+  .hero-kpi strong{font-size:18px}
+  .hero-kpi em{font-size:11px}
+  .hero-kpi span{font-size:9.5px;letter-spacing:.08em}
   .painel{padding:16px 12px}
   .painel:has(.quadro){padding:16px 7px}
   .quadro{font-size:11.5px}
@@ -270,7 +335,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
   <div class="hero">
     <div>
       <h1>As finanças dos clubes brasileiros num só lugar</h1>
-      <p>Escolha os clubes pelo escudo e veja os números lado a lado. Cada clube mapeado tem painel próprio montado a partir das demonstrações financeiras oficiais, de 2020 a 2025.</p>
+      <p>Escolha os clubes pelo mapa ou pelo escudo e veja os números lado a lado. Cada clube mapeado tem painel próprio montado a partir das demonstrações financeiras oficiais, de 2020 a 2025.</p>
       <div class="chips">
         <span class="chip" id="chipMapa">20 clubes no mapa</span>
         <span class="chip" id="chipProntos">3 com painel publicado</span>
@@ -278,7 +343,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
         <span class="chip">Fonte: DFs oficiais dos clubes</span>
       </div>
     </div>
-    <svg class="polvo" id="polvo" viewBox="0 0 420 280" role="img" aria-label="Estrutura do hub com um tentáculo para cada clube publicado"></svg>
+    <div class="hero-kpis" id="heroKpis"></div>
   </div>
 
   <section id="clubes">
@@ -290,18 +355,35 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
         <p class="sub sub-simples">Clique no escudo para incluir ou tirar o clube da leitura abaixo. O primeiro ícone é o Brasileirão, que soma todos os clubes já mapeados.</p>
       </div>
     </div>
-    <div class="grade-box">
-      <div class="grade-topo">
-        <div class="conta" id="conta"></div>
-        <div class="acoes">
-          <button class="acao" type="button" id="acTodos">Selecionar os mapeados</button>
-          <button class="acao" type="button" id="acLimpar">Limpar seleção</button>
+    <div class="sel-grid">
+      <div class="painel">
+        <div class="painel-head">
+          <div><h3>Mapa do projeto</h3><p class="desc">Clique num estado ou numa região para montar a seleção</p></div>
+        </div>
+        <div class="regioes" id="regioes"></div>
+        <svg class="mapa-svg" id="mapa" viewBox="0 0 613 641" role="img" aria-label="Mapa do Brasil por estado, com os clubes mapeados"></svg>
+        <div class="legenda-mapa">
+          <span><i style="background:var(--surface-2)"></i>Sem clube no projeto</span>
+          <span><i style="background:color-mix(in srgb,var(--s4) 12%,var(--surface))"></i>No mapa, sem dados</span>
+          <span><i style="background:color-mix(in srgb,var(--s4) 52%,var(--surface))"></i>Clubes mapeados</span>
         </div>
       </div>
-      <div class="trilho" id="trilho" role="group" aria-label="Clubes disponíveis"></div>
-      <div class="legenda-grade">
-        <span><i></i>Mapeado, entra no comparativo</span>
-        <span><i class="cinza"></i>Em mapeamento, ainda sem dados</span>
+
+      <div class="painel">
+        <div class="grade-topo">
+          <div class="conta" id="conta"></div>
+          <div class="acoes">
+            <button class="acao" type="button" id="acTodos">Selecionar os mapeados</button>
+            <button class="acao" type="button" id="acLimpar">Limpar seleção</button>
+          </div>
+        </div>
+        <div class="blocos-uf" id="blocos" role="group" aria-label="Clubes disponíveis"></div>
+        <div class="legenda-grade">
+          <span><i></i>Mapeado, entra no comparativo</span>
+          <span><i class="cinza"></i>Em mapeamento, ainda sem dados</span>
+        </div>
+        <div class="rank" id="ranking"></div>
+        <div class="resumo-sel" id="resumoSel"></div>
       </div>
     </div>
   </section>
@@ -316,29 +398,31 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
       <div class="toolbar" id="anosSimples"><span class="lbl">Ano</span></div>
     </div>
 
-    <div class="painel">
-      <div class="painel-head">
-        <div><h3 id="tSimples">O básico dos clubes</h3><p class="desc">Clique numa linha para ver a evolução abaixo</p></div>
+    <div class="duplo">
+      <div class="painel">
+        <div class="painel-head">
+          <div><h3 id="tSimples">O básico dos clubes</h3><p class="desc">Clique numa linha para ver a evolução ao lado</p></div>
+        </div>
+        <div class="tbl-scroll"><table class="quadro" id="quadroSimples"></table></div>
+        <p class="frase-simples" id="fraseSimples"></p>
       </div>
-      <div class="tbl-scroll"><table class="quadro" id="quadroSimples"></table></div>
-      <p class="frase-simples" id="fraseSimples"></p>
-    </div>
 
-    <div class="grid2">
-      <div class="painel">
-        <div class="painel-head">
-          <div><h3 id="tBalanca">Quanto entra e quanto se deve</h3><p class="desc" id="dBalanca"></p></div>
+      <div class="coluna">
+        <div class="painel">
+          <div class="painel-head">
+            <div><h3 id="tBalanca">Quanto entra e quanto se deve</h3><p class="desc" id="dBalanca"></p></div>
+          </div>
+          <div class="legenda" id="legBalanca"></div>
+          <div id="chBalanca"></div>
         </div>
-        <div class="legenda" id="legBalanca"></div>
-        <div id="chBalanca"></div>
-      </div>
-      <div class="painel">
-        <div class="painel-head">
-          <div><h3 id="tEvolS">Evolução</h3><p class="desc" id="dEvolS"></p></div>
-          <select class="metric-select" id="selMetricS" aria-label="Indicador do gráfico simples"></select>
+        <div class="painel">
+          <div class="painel-head">
+            <div><h3 id="tEvolS">Evolução</h3><p class="desc" id="dEvolS"></p></div>
+            <select class="metric-select" id="selMetricS" aria-label="Indicador do gráfico simples"></select>
+          </div>
+          <div class="legenda" id="legEvolS"></div>
+          <div class="chart" id="chEvolS"></div>
         </div>
-        <div class="legenda" id="legEvolS"></div>
-        <div class="chart" id="chEvolS"></div>
       </div>
     </div>
 
@@ -354,28 +438,30 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
       </div>
       <div class="toolbar" id="anos"><span class="lbl">Ano</span></div>
     </div>
-    <div class="painel">
-      <div class="painel-head">
-        <div><h3 id="tQuadro">Quadro comparativo</h3><p class="desc">R$ mil, salvo indicação. O destaque marca o melhor número do ano.</p></div>
+    <div class="duplo">
+      <div class="painel">
+        <div class="painel-head">
+          <div><h3 id="tQuadro">Quadro comparativo</h3><p class="desc">R$ mil, salvo indicação. O destaque marca o melhor número do ano.</p></div>
+        </div>
+        <div class="tbl-scroll"><table class="quadro" id="quadro"></table></div>
       </div>
-      <div class="tbl-scroll"><table class="quadro" id="quadro"></table></div>
-    </div>
 
-    <div class="grid2">
-      <div class="painel">
-        <div class="painel-head">
-          <div><h3 id="tEvol">Evolução</h3><p class="desc" id="dEvol"></p></div>
-          <select class="metric-select" id="selMetric" aria-label="Indicador do gráfico"></select>
+      <div class="coluna">
+        <div class="painel">
+          <div class="painel-head">
+            <div><h3 id="tEvol">Evolução</h3><p class="desc" id="dEvol"></p></div>
+            <select class="metric-select" id="selMetric" aria-label="Indicador do gráfico"></select>
+          </div>
+          <div class="legenda" id="legEvol"></div>
+          <div class="chart" id="chEvol"></div>
         </div>
-        <div class="legenda" id="legEvol"></div>
-        <div class="chart" id="chEvol"></div>
-      </div>
-      <div class="painel">
-        <div class="painel-head">
-          <div><h3 id="tMix">Composição da receita</h3><p class="desc">Participação de cada fonte na receita total do ano</p></div>
+        <div class="painel">
+          <div class="painel-head">
+            <div><h3 id="tMix">Composição da receita</h3><p class="desc">Participação de cada fonte na receita total do ano</p></div>
+          </div>
+          <div class="legenda" id="legMix"></div>
+          <div id="chMix"></div>
         </div>
-        <div class="legenda" id="legMix"></div>
-        <div id="chMix"></div>
       </div>
     </div>
   </section>
@@ -387,6 +473,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
       <p>No Vasco os anos de 2020 e 2021 são da associação e o exercício de 2022 cobre apenas cinco meses, porque a SAF foi constituída em agosto daquele ano. De 2023 em diante a série é de anos cheios da SAF.</p>
       <p>No São Paulo as deduções da receita vêm em linha separada e o painel do clube já as abate do total, então na composição da receita elas são rateadas entre as fontes para a soma fechar. Em todos os clubes, o que o clube deve é o passivo exigível, circulante mais não circulante, sem o patrimônio líquido.</p>
       <p>O Brasileirão é a soma dos clubes já mapeados. Os índices dele são recalculados sobre os totais e quando algum clube não publica uma linha o agregado fica sem valor naquele ano, em vez de somar um buraco.</p>
+      <p>O mapa usa o contorno dos estados do projeto <a href="https://github.com/VictorCazanave/svg-maps" target="_blank" rel="noopener">svg-maps</a>, em licença Creative Commons BY 4.0, com o traçado simplificado para o desenho ficar leve. A cor de cada estado mostra quantos clubes dali já têm painel publicado.</p>
     </div>
   </section>
 </main>
@@ -693,51 +780,160 @@ function ligaTema(btn,chave){
 }
 
 
-/* ---------- polvo do hero ---------- */
-function renderPolvo(){
-  const svg=document.getElementById('polvo');
-  const cx=210,cy=182, lista=MAPEADOS;
-  /* os clubes ficam num arco acima do hub, então entra clube novo sem mexer no desenho */
-  const n=lista.length, rx=n>4?182:(n>3?168:150), ry=n>4?80:(n>3?86:95);
-  const pos=lista.map((c,i)=>{
-    const ang=(n===1)?270:(202+i*(136/(n-1)));
-    const r=ang*Math.PI/180;
-    return [cx+rx*Math.cos(r), cy+ry*Math.sin(r)];
+/* ---------- mapa do Brasil ---------- */
+/* contorno de cada estado, simplificado, na projeção do mapa base do IBGE.
+   cada entrada traz o desenho e o ponto interno onde a sigla fica */
+const UF_GEO={"AC":["M30.7,238.0L28.7,238.0L29.0,235.4L25.8,230.0L12.8,228.5L16.5,224.5L16.5,222.1L7.6,212.1L5.8,206.8L3.9,205.7L4.9,203.1L0.3,199.6L1.4,196.5L4.9,195.8L3.5,192.8L21.5,200.3L57.3,209.1L83.7,223.3L115.2,236.7L108.4,242.2L100.5,245.9L98.6,248.9L93.0,248.6L89.6,253.4L82.0,255.9L82.1,253.8L71.9,252.7L63.9,252.4L57.6,254.8L54.6,252.7L52.9,253.9L53.3,231.3L54.7,229.0L42.5,237.9Z",53.7,227.5,79.9],"AL":["M562.2,230.6L558.5,227.5L566.0,220.0L577.9,227.0L587.7,225.5L593.3,220.5L597.6,221.1L601.6,219.6L606.7,220.9L587.1,245.8L577.7,237.6L568.6,233.5Z",580,227.5,43],"AP":["M345.2,100.0L339.4,99.7L335.7,95.8L333.9,88.2L330.9,84.9L329.3,85.1L327.8,81.6L326.3,70.9L321.6,67.5L321.2,62.6L317.7,60.0L314.2,60.4L308.0,55.3L301.0,54.7L300.4,44.0L301.7,44.1L301.7,46.1L310.8,49.4L316.4,45.4L319.8,47.3L322.8,45.7L324.3,47.9L329.7,47.9L334.9,43.0L338.3,33.2L347.2,20.3L350.9,17.7L352.3,20.5L350.7,14.1L358.1,21.8L358.9,33.6L364.3,48.6L367.6,53.6L376.0,55.7L376.6,61.6L373.2,63.4L376.4,63.6L367.9,71.9L363.0,79.1L359.9,80.0L354.3,85.6L348.4,93.8L348.2,98.0L345.2,100.0ZM368.6,53.0L367.1,49.9L369.0,49.0L370.3,51.7L368.6,53.0ZM371.1,70.6L371.7,68.5L374.8,67.9L373.8,69.9L371.1,70.6ZM374.5,67.7L373.8,66.9L375.7,65.8L374.5,67.7ZM367.3,49.3L366.8,48.0L368.6,48.1L367.3,49.3Z",337.9,54.9,69.9],"AM":["M166.1,47.6L176.8,52.4L175.2,57.2L180.7,69.5L179.1,71.0L180.1,74.2L179.1,83.1L182.9,91.4L179.7,94.1L189.7,103.6L193.9,104.2L195.0,93.3L199.9,89.8L204.3,90.7L207.1,95.2L213.6,93.0L212.8,89.3L218.0,78.6L236.5,78.6L236.6,87.2L238.7,89.2L238.3,92.0L243.1,95.2L244.0,98.4L255.2,106.7L264.4,110.3L269.5,115.9L273.6,115.7L275.5,118.6L245.6,182.9L242.8,186.3L247.9,196.2L244.1,204.0L245.3,208.1L242.8,217.6L193.7,218.6L192.0,217.2L188.8,220.3L185.6,218.8L184.9,215.9L182.9,215.6L181.6,212.3L176.5,207.7L163.6,206.6L160.5,210.9L156.6,213.2L157.6,215.0L154.4,218.4L154.5,221.7L144.2,222.0L139.7,229.0L137.3,226.2L129.2,231.2L125.8,228.5L119.0,228.6L117.4,232.3L112.2,235.4L83.7,223.3L57.3,209.1L21.5,200.3L3.5,192.8L5.4,187.9L14.0,182.3L12.4,176.8L16.5,169.8L18.3,161.7L33.1,152.2L47.8,150.1L50.9,146.5L57.8,146.4L59.7,149.4L63.5,148.3L72.5,102.9L71.6,97.6L68.8,93.8L68.9,90.2L61.9,84.6L62.1,73.1L71.2,70.7L76.4,72.1L74.2,66.1L65.2,65.5L65.2,55.6L69.7,54.5L91.6,55.4L90.0,53.4L90.9,51.5L95.3,55.1L103.0,48.9L108.5,57.0L108.4,63.9L111.6,63.2L120.7,70.5L123.2,70.7L131.5,66.8L132.8,68.1L131.7,70.8L132.7,72.1L135.8,68.0L137.8,67.8L139.2,64.4L154.6,57.6L156.4,51.9L165.8,48.8Z",125.3,193.1,242.1],"BA":["M527.8,365.6L527.5,361.8L523.4,358.8L522.9,355.5L521.5,356.2L522.9,348.5L527.2,347.1L526.8,343.0L533.2,335.7L527.5,330.6L516.3,328.3L510.3,329.5L509.8,325.6L503.3,319.4L498.6,320.4L481.7,311.6L476.6,314.0L471.3,312.6L470.4,310.6L471.8,306.9L465.3,305.4L459.7,306.9L444.2,316.4L441.3,319.8L436.1,321.2L438.7,312.6L438.6,307.5L433.7,301.0L433.1,295.9L436.1,290.7L434.4,288.6L436.3,284.6L433.6,282.2L434.7,277.4L432.0,275.0L432.2,271.2L436.3,268.4L433.0,266.3L436.0,263.3L430.5,261.7L428.4,258.8L433.7,252.2L432.6,250.0L441.1,243.2L443.5,243.2L447.8,250.3L452.0,252.2L455.9,251.8L462.2,247.3L466.4,247.6L473.0,239.2L473.4,234.6L471.2,229.2L474.5,227.6L478.7,229.1L482.2,228.2L486.1,230.8L492.3,229.9L498.9,225.7L502.0,226.4L503.9,224.5L503.8,222.1L507.6,221.3L509.5,217.8L516.6,219.6L517.7,224.8L519.9,225.7L519.3,229.4L521.1,230.0L525.8,228.0L527.0,223.6L531.6,223.0L532.6,219.8L540.7,215.0L544.3,217.8L549.7,219.0L552.2,222.1L554.4,219.7L559.0,229.0L561.9,230.0L561.7,234.0L565.7,239.6L565.6,248.0L562.1,250.1L559.2,249.4L558.4,252.0L562.4,257.3L562.7,260.4L567.2,263.0L571.1,262.5L567.1,271.4L557.2,284.6L553.8,285.9L554.2,281.3L551.2,279.0L549.9,282.8L548.8,282.8L548.7,280.3L547.8,281.6L550.7,283.6L545.3,294.2L546.4,293.7L547.1,296.6L545.9,304.4L547.7,300.4L545.5,312.0L548.5,331.7L543.3,352.6L544.4,361.0L539.5,365.3L536.2,371.3L527.8,365.6ZM550.0,287.6L552.2,283.7L552.9,285.3L550.0,287.6ZM547.5,294.4L546.1,291.7L548.1,291.7L547.5,294.4Z",501.6,265.8,136.1],"CE":["M574.1,157.1L566.6,160.7L559.6,173.9L553.0,179.5L552.7,181.5L553.9,181.8L550.5,190.5L554.0,195.8L551.3,200.6L547.1,204.2L536.6,196.8L522.6,197.0L521.9,194.1L524.5,188.0L519.9,185.7L518.9,183.1L515.4,165.6L516.7,163.4L515.1,158.4L515.6,150.9L508.7,133.6L511.9,126.8L531.0,126.3L554.5,139.9L567.7,153.3L573.6,155.8Z",544.3,157.5,58.1],"DF":["M417.0,334.1L402.3,334.1L403.1,325.3L415.0,325.3L416.8,327.3L416.1,333.1Z",409.5,333.9,14.5],"ES":["M501.9,411.6L502.2,404.3L503.9,402.3L509.6,402.0L512.8,393.4L516.0,390.1L516.3,384.7L513.9,380.6L511.7,379.8L516.6,378.9L514.9,376.4L515.3,372.9L513.1,370.9L516.5,367.7L518.9,368.5L517.3,365.4L526.9,365.0L536.2,371.3L534.9,377.5L535.8,387.2L534.0,392.9L530.7,394.9L527.2,403.5L525.5,402.6L526.6,404.4L524.7,408.7L519.1,412.9L515.9,419.9L504.5,417.1L503.8,412.4Z",514.3,404.8,24.2],"GO":["M417.0,334.1L416.8,327.3L415.0,325.3L403.1,325.3L402.3,334.1L417.0,334.1L414.6,341.5L417.7,344.1L419.4,348.7L413.4,357.1L417.4,359.0L416.2,363.5L417.4,366.9L406.9,373.9L401.9,371.3L391.6,370.9L384.6,376.4L381.4,374.7L369.8,377.2L366.4,384.1L361.7,387.2L361.4,390.3L357.6,387.1L346.1,383.2L336.4,377.6L329.8,377.0L331.7,372.5L327.4,371.7L325.0,354.3L327.9,347.5L333.8,342.1L336.8,335.2L339.9,331.6L345.6,330.3L349.3,320.3L357.8,315.6L361.5,302.0L361.4,296.9L365.6,290.3L367.9,280.6L370.9,277.0L369.2,283.0L384.9,287.9L389.8,278.4L393.7,288.4L396.4,286.2L403.7,286.0L403.4,288.3L409.9,290.4L411.1,287.0L413.6,289.9L417.9,286.9L433.6,282.1L436.3,284.5L434.4,288.5L436.1,290.6L434.3,292.0L433.1,297.4L435.4,304.4L438.6,307.0L438.5,313.3L436.0,316.3L432.8,316.0L429.4,312.7L428.3,318.5L423.6,318.0L422.8,326.0L424.4,331.1L418.2,334.0Z",371.5,359.1,91.8],"MA":["M458.8,129.2L456.3,133.3L461.9,127.6L464.1,120.6L468.0,119.6L466.5,123.5L463.3,125.3L465.6,125.0L465.4,126.6L469.7,121.7L477.1,121.5L477.3,118.8L485.2,120.5L496.1,125.6L500.5,126.3L500.1,124.9L502.3,124.6L502.6,127.7L496.3,135.5L492.2,135.8L484.3,147.9L486.3,151.9L484.9,156.2L486.9,164.5L482.6,169.4L482.4,171.9L483.0,176.3L486.6,179.8L485.4,185.9L478.0,188.1L473.0,186.2L468.3,187.2L458.1,196.1L445.5,201.6L443.5,209.9L437.6,221.1L440.5,229.3L438.1,243.0L431.9,240.8L427.5,234.3L428.9,230.3L425.0,228.3L423.6,224.0L420.4,222.7L423.2,219.4L424.3,214.0L429.6,212.5L429.8,206.2L428.0,205.0L421.5,207.3L414.5,199.3L413.9,195.5L410.2,194.2L413.9,190.7L415.9,179.6L414.1,168.3L408.7,165.8L407.7,163.7L400.8,162.4L394.4,165.3L409.1,153.4L412.6,152.7L416.7,145.4L420.3,142.6L422.7,134.8L426.9,130.0L428.0,126.1L427.0,124.5L430.6,121.5L431.0,117.4L434.0,112.1L432.5,109.0L434.2,108.2L434.7,102.4L437.7,98.8L439.5,101.7L441.4,100.4L442.0,103.4L443.4,102.0L445.9,102.5L445.7,106.1L447.8,102.5L447.4,109.1L449.5,108.1L450.4,105.1L455.1,104.3L453.7,107.0L455.6,106.6L457.7,110.3L460.1,110.6L460.8,113.9L458.3,118.2L461.5,115.5L462.9,118.2L459.5,122.0L457.8,128.6L458.8,129.2ZM459.4,129.6L461.0,124.2L459.4,129.6ZM453.1,103.9L453.3,101.7L454.9,102.1L453.1,103.9ZM456.6,108.1L457.9,106.4L458.2,107.9L456.6,108.1ZM442.4,103.2L443.1,99.6L442.4,103.2Z",443.3,160.1,85],"MT":["M207.2,296.3L212.8,292.3L214.8,286.1L217.8,284.1L220.5,279.0L220.6,271.5L217.6,267.7L217.2,264.4L220.2,259.5L218.8,255.9L213.1,255.5L212.2,253.8L195.0,253.7L195.9,244.7L194.1,240.2L195.7,232.3L193.6,227.2L195.7,220.8L193.7,218.6L241.5,218.3L245.3,208.1L244.1,204.0L247.9,196.2L255.4,210.6L256.4,217.7L269.2,228.6L371.3,235.5L365.8,249.2L363.3,261.1L364.8,263.3L363.8,265.6L364.6,279.1L367.4,283.6L365.6,290.3L361.4,296.9L359.8,309.8L356.4,317.0L352.9,317.4L349.3,320.3L345.6,330.3L339.9,331.6L332.5,344.1L327.9,347.5L324.6,357.7L327.3,366.2L315.8,366.3L312.8,364.9L316.3,360.4L317.5,353.8L310.5,359.9L306.4,360.7L304.3,358.0L301.8,357.9L294.1,360.8L279.5,352.7L274.4,354.9L269.5,354.8L264.0,362.4L258.3,364.3L251.6,357.2L249.8,357.8L244.0,353.9L242.6,344.4L244.9,338.0L216.3,337.8L215.3,325.1L209.9,319.0L214.8,318.9L214.5,311.4L211.3,304.1L212.8,301.2L211.4,298.3L208.3,297.2Z",282.2,238.7,175.6],"MS":["M359.2,400.1L358.5,402.9L355.2,404.0L350.3,408.6L342.8,427.3L338.0,433.7L328.5,440.1L325.6,443.9L319.1,446.9L316.8,454.0L313.0,456.3L311.1,465.1L308.7,466.6L302.7,462.4L296.4,465.6L290.4,465.0L286.8,446.4L287.4,442.7L283.6,436.9L278.1,436.6L275.1,433.2L271.4,436.2L267.6,436.6L250.3,433.5L253.0,415.0L247.6,401.5L252.4,398.4L248.2,394.5L254.7,383.0L253.6,380.8L257.5,369.3L254.5,361.5L258.3,364.3L264.0,362.4L269.5,354.8L274.4,354.9L279.5,352.7L294.1,360.8L301.8,357.9L304.3,358.0L307.4,360.7L310.5,359.9L317.5,353.8L316.3,360.4L312.8,364.9L315.8,366.3L327.3,366.2L327.7,372.1L331.7,372.5L329.8,377.0L336.4,377.6L346.1,383.2L357.6,387.1L360.5,389.8L359.5,397.5Z",304.7,392.6,110.9],"MG":["M527.8,365.6L524.3,364.2L517.3,365.4L518.9,368.5L516.5,367.7L513.1,370.9L515.3,372.9L514.9,376.4L516.6,378.9L511.7,379.8L513.9,380.6L516.3,384.7L516.0,390.1L512.8,393.4L509.6,402.0L503.9,402.3L502.2,404.3L501.9,411.6L497.6,414.8L494.0,425.2L495.5,427.2L483.4,432.7L471.6,433.0L447.2,442.7L441.5,441.9L441.5,445.2L439.5,446.5L432.0,446.6L430.0,443.3L430.7,440.8L427.1,438.8L426.8,429.2L429.4,423.0L425.5,421.4L421.8,422.1L418.3,413.9L420.0,409.4L417.2,406.0L417.8,401.6L414.6,398.3L408.4,398.5L407.8,400.6L405.1,401.3L402.4,399.4L401.4,400.6L393.2,401.3L392.2,406.0L390.4,401.3L387.3,403.8L385.9,399.4L382.0,397.2L376.8,397.9L367.4,395.2L359.2,400.1L359.9,390.1L361.7,390.0L363.4,385.1L366.4,384.1L369.8,377.2L381.4,374.7L384.6,376.4L391.6,370.9L401.9,371.3L406.9,373.9L417.4,366.9L416.2,363.5L417.4,359.0L413.4,357.1L419.4,348.7L417.7,344.1L414.6,341.5L417.0,334.1L424.4,331.1L422.8,326.0L423.6,318.0L428.3,318.5L429.4,312.7L432.8,316.0L437.0,315.3L436.5,321.4L438.5,319.5L441.4,319.7L444.2,316.4L463.5,305.3L471.9,306.9L470.4,310.5L471.3,312.5L476.6,314.0L481.7,311.5L498.5,320.4L503.3,319.3L509.8,325.5L510.3,329.5L518.2,328.4L527.5,330.6L532.0,333.5L533.2,335.7L531.7,338.8L526.8,343.0L527.2,347.1L523.7,347.6L522.0,351.8L521.5,356.2L522.9,355.5L523.4,358.8L527.6,361.8L527.4,364.8Z",438.3,390.1,155.4],"PA":["M371.3,235.5L274.3,229.6L264.7,225.8L264.3,223.2L256.4,217.7L255.4,210.6L251.6,201.4L243.5,189.7L242.7,186.3L245.5,182.9L275.4,118.6L273.6,115.7L269.5,115.9L264.3,110.3L255.1,106.7L248.6,102.2L243.9,98.4L243.0,95.2L238.3,92.0L238.7,89.2L236.6,87.2L234.9,61.7L237.4,63.8L241.9,62.5L242.2,59.6L245.4,57.6L249.9,58.7L253.8,55.5L257.4,55.5L260.5,51.6L264.1,50.8L267.6,52.8L273.9,52.0L281.8,53.5L282.8,50.4L279.5,47.3L281.5,43.0L285.7,44.9L297.4,42.6L301.0,44.6L301.1,54.7L308.0,55.3L314.2,60.4L317.7,60.0L321.2,62.6L321.6,67.6L326.4,70.9L327.9,81.6L329.4,85.1L331.0,84.9L333.9,88.2L335.7,95.8L339.5,99.7L345.3,100.0L343.6,103.9L340.2,103.0L332.7,107.0L339.2,105.9L340.5,108.4L355.5,100.9L359.4,96.5L362.0,96.5L361.9,102.9L364.5,109.6L362.2,111.6L357.3,110.4L354.1,107.7L351.2,113.9L353.2,118.1L351.9,113.7L354.5,109.5L356.8,110.7L359.4,113.6L359.4,119.6L361.8,121.0L359.2,118.4L359.6,114.2L360.4,113.0L361.8,113.8L363.8,116.6L362.1,112.5L364.3,110.2L367.9,110.9L368.4,112.4L374.9,110.4L380.6,111.2L386.1,108.7L382.6,117.1L382.9,121.9L387.6,111.5L391.0,110.6L395.3,104.9L399.5,107.8L399.7,105.3L403.2,104.8L398.7,105.0L398.6,102.3L400.8,102.5L401.3,97.4L405.3,93.1L406.7,94.1L410.1,92.0L410.3,93.7L413.2,92.0L415.5,94.7L414.6,91.4L417.3,91.4L420.7,93.8L422.4,93.0L422.4,96.1L424.4,93.2L425.0,95.2L427.5,94.9L427.8,98.2L434.4,97.0L433.3,100.4L435.4,99.3L436.0,100.9L434.2,108.2L432.5,109.0L434.1,110.5L433.1,115.2L431.0,117.4L430.7,121.5L427.0,124.5L428.0,126.1L427.0,130.0L422.7,134.8L420.3,142.6L416.8,145.4L412.6,152.7L409.1,153.4L394.4,165.3L400.3,166.0L403.9,169.3L401.5,171.3L402.6,174.1L395.7,185.5L387.1,190.0L387.6,194.9L384.7,199.2L388.1,203.4L385.7,212.6L381.8,219.2L374.0,227.4L371.3,235.5ZM392.5,105.2L382.5,107.4L380.0,109.7L378.7,107.5L377.8,110.3L374.1,108.6L369.1,110.6L365.9,110.0L362.2,102.8L362.7,100.0L366.1,99.3L362.5,97.2L362.8,92.2L366.2,92.7L363.6,89.9L364.8,86.2L369.8,83.7L380.5,86.0L387.6,84.3L399.7,86.2L397.7,96.1L392.5,105.2ZM345.2,105.0L345.5,100.5L349.0,98.9L349.8,93.5L353.3,90.5L356.2,90.3L356.9,92.7L355.0,97.9L345.2,105.0ZM373.7,82.1L369.5,81.8L368.8,79.2L379.2,76.9L380.6,77.9L376.1,82.8L373.7,82.1ZM378.5,82.1L382.4,81.0L384.6,83.2L379.7,84.6L377.4,83.7L378.5,82.1ZM361.5,86.5L358.9,85.6L359.7,83.5L366.1,83.0L361.5,86.5ZM371.0,76.8L370.1,74.3L374.0,72.2L374.6,73.7L371.0,76.8ZM357.1,97.0L358.2,92.9L362.2,91.1L362.1,92.9L357.1,97.0ZM368.0,79.5L366.5,78.7L369.0,72.5L370.0,77.3L368.0,79.5ZM353.2,89.7L357.8,84.1L357.2,86.5L353.2,89.7ZM367.1,82.6L364.7,80.1L365.7,78.9L367.8,80.2L367.1,82.6ZM361.7,113.2L358.7,112.7L357.1,110.4L361.4,111.7L361.7,113.2ZM340.6,107.7L341.0,105.3L343.4,104.5L345.0,105.7L340.6,107.7ZM353.3,101.0L356.1,95.2L355.6,99.9L353.3,101.0ZM359.6,91.1L361.2,88.1L362.8,88.1L359.6,91.1ZM391.0,110.0L389.8,108.6L391.9,106.6L391.0,110.0ZM357.5,90.6L358.8,86.6L360.1,87.7L357.5,90.6ZM359.7,95.6L356.5,99.1L359.7,95.6ZM337.2,105.8L341.1,104.0L337.2,105.8ZM400.7,101.0L398.9,100.0L399.7,98.8L401.1,98.8L400.7,101.0ZM363.5,82.1L360.3,82.6L362.4,81.1L363.5,82.1ZM358.2,90.7L360.8,88.0L358.2,90.7ZM360.3,95.2L361.8,93.4L360.3,95.2ZM388.4,111.1L389.7,108.8L390.1,110.5L388.4,111.1ZM361.7,87.8L363.2,85.7L361.7,87.8ZM429.2,98.0L430.0,95.8L430.5,97.7L429.2,98.0Z",348.8,129.4,156.7],"PB":["M610.7,199.4L604.7,196.9L598.6,202.1L584.6,205.3L583.2,208.5L578.4,211.0L575.8,209.3L575.6,206.2L572.5,206.5L575.2,202.9L574.8,199.8L577.8,198.8L577.4,197.1L572.4,195.6L562.5,203.0L558.3,204.2L556.9,202.0L554.1,202.9L551.2,200.4L554.0,195.8L550.7,189.6L554.6,180.8L560.3,183.5L565.5,180.0L566.0,178.0L574.5,175.7L575.1,177.3L569.7,185.9L573.2,186.4L574.1,188.3L581.0,187.2L582.2,190.7L585.1,189.0L585.0,185.4L586.5,185.2L585.5,181.4L587.4,180.0L593.6,182.6L609.6,183.2L610.6,192.9L611.7,190.6L612.3,193.6L611.6,199.4Z",582.4,193.3,59.5],"PR":["M397.0,499.7L388.8,499.9L382.6,504.0L375.7,500.2L366.5,500.5L361.7,504.4L356.2,505.2L354.8,507.5L355.6,510.5L352.9,512.3L351.6,510.4L343.6,510.1L340.8,507.9L331.2,505.8L326.2,506.4L322.8,504.2L317.9,504.5L314.2,493.7L310.8,491.3L305.4,493.7L303.1,492.6L308.6,471.7L307.2,468.2L311.1,465.1L313.0,456.3L316.8,454.0L319.1,446.9L328.9,441.6L340.0,442.4L342.3,440.8L350.1,443.4L355.1,443.0L362.5,447.5L375.2,447.2L380.8,453.3L381.5,463.1L387.1,471.8L385.9,477.0L397.0,477.3L398.6,478.6L396.9,482.9L398.3,484.2L400.0,480.6L402.9,481.0L403.3,486.3L404.8,488.2L402.9,490.7L402.6,488.6L404.0,487.7L400.0,487.9L398.6,491.0L394.9,490.1L395.1,491.3L400.5,492.7L398.0,496.2L394.1,498.0L397.1,497.8L397.2,499.0Z",354.3,487.3,99.5],"PE":["M558.5,227.5L554.4,219.6L552.2,221.9L549.7,218.9L544.4,217.7L540.7,214.9L532.7,219.6L531.6,222.8L527.1,223.4L525.8,227.9L521.2,229.9L519.3,229.3L520.0,225.6L517.8,224.7L516.7,219.5L509.6,217.7L521.9,208.4L522.7,204.4L520.8,202.2L520.8,197.2L536.6,196.8L545.5,204.3L551.3,200.6L554.1,202.9L556.9,202.0L558.3,204.2L562.5,203.0L573.9,195.1L577.9,198.5L574.8,199.8L575.2,202.9L572.5,206.5L575.6,206.2L575.8,209.3L578.4,211.0L583.2,208.5L584.6,205.3L598.6,202.1L604.7,196.9L611.6,199.6L610.8,203.6L611.9,205.5L606.7,220.9L601.6,219.6L597.6,221.1L593.3,220.5L587.7,225.5L577.9,227.0L566.0,220.0L559.9,226.4Z",561.5,214.3,94.8],"PI":["M506.0,127.2L511.5,129.0L508.6,135.1L515.6,150.9L515.1,158.4L516.7,163.4L515.4,165.6L517.1,175.3L519.9,185.7L524.5,188.0L521.9,194.1L522.6,197.0L520.2,198.0L520.8,202.2L522.7,204.4L521.9,208.4L509.6,217.7L507.6,221.2L503.8,222.0L503.9,224.4L502.1,226.2L499.0,225.6L489.1,230.5L485.3,230.4L482.2,228.1L478.7,229.0L476.5,227.5L471.3,229.1L473.3,238.2L469.4,245.1L465.0,247.9L460.0,247.9L456.0,251.7L452.0,252.1L447.9,250.2L443.5,243.2L438.2,243.0L440.6,229.3L437.7,221.1L443.5,209.9L445.5,201.6L458.1,196.2L468.4,187.2L473.0,186.2L478.1,188.1L485.5,185.9L486.6,179.8L483.1,176.3L482.5,171.9L482.6,169.4L486.9,164.5L484.9,156.2L486.3,151.9L484.4,147.9L492.2,135.8L496.4,135.5L502.3,129.3L502.3,125.0L504.9,126.8Z",483,207.6,78],"RJ":["M468.6,450.5L474.7,449.1L470.8,447.1L464.9,449.6L463.0,447.5L457.7,450.7L457.5,452.6L460.8,453.7L456.8,454.5L455.1,452.4L456.2,448.9L464.4,445.8L466.0,443.7L465.3,442.0L458.7,442.1L455.6,438.8L471.6,433.0L483.5,432.8L495.5,427.2L494.1,425.2L497.6,414.8L501.9,411.6L503.9,412.4L504.5,417.1L516.0,419.9L514.7,425.0L515.9,431.7L503.5,437.8L500.0,441.5L499.3,447.5L482.7,448.0L483.0,443.3L480.0,445.1L481.3,448.5L468.6,450.5ZM463.5,452.5L462.8,451.6L464.9,450.0L467.2,451.7L463.5,452.5Z",479.8,438.4,46.2],"RN":["M609.6,183.2L593.6,182.6L587.4,180.0L585.5,181.4L586.5,185.2L585.0,185.4L585.1,189.0L582.2,190.7L581.0,187.2L574.1,188.3L573.2,186.4L569.7,185.9L575.1,177.3L574.5,175.7L566.0,178.0L565.5,180.0L560.3,183.5L554.6,180.8L552.7,181.5L554.5,177.3L557.6,176.6L559.6,173.9L566.6,160.7L574.1,157.1L582.7,161.3L593.8,160.5L601.5,162.3L605.5,168.8L609.3,181.7Z",583,175.6,49.1],"RS":["M322.3,638.8L319.8,637.2L320.0,627.6L326.6,619.9L319.5,614.8L314.4,606.1L308.0,603.0L303.2,596.7L293.3,592.9L287.8,585.6L283.8,589.7L281.1,589.8L281.2,584.7L268.6,572.2L264.6,572.3L262.3,575.6L257.5,575.3L256.2,573.7L260.6,570.0L261.3,566.9L265.0,565.1L272.0,555.0L274.6,553.7L282.9,541.3L286.0,542.0L285.2,538.7L289.9,536.4L291.9,533.5L296.5,531.9L299.8,526.7L308.1,524.7L312.4,520.7L318.5,520.7L322.3,518.7L323.5,520.2L332.7,522.0L339.7,521.6L344.4,523.9L345.4,526.4L348.9,525.7L358.1,531.8L365.4,541.6L378.7,543.1L379.6,545.5L376.3,547.5L375.4,553.1L372.3,557.7L374.1,558.9L375.6,555.9L379.6,558.3L363.8,589.1L342.6,609.7L342.3,603.4L345.9,604.3L355.4,596.9L356.8,589.8L359.8,590.6L360.0,587.1L363.9,583.9L364.2,578.8L366.1,578.6L365.5,573.8L359.8,577.7L355.0,570.5L354.4,573.2L356.1,577.6L355.0,584.8L353.8,581.8L352.0,589.5L344.3,594.5L342.7,600.6L340.3,601.9L339.7,607.6L342.3,609.6L337.8,615.8L333.9,627.1L324.4,637.2Z",318.4,566.8,113.7],"RO":["M187.6,291.2L185.9,287.9L175.6,285.5L171.0,280.0L166.9,280.7L161.5,277.0L157.5,278.2L150.6,277.0L148.4,273.4L140.7,269.4L134.7,258.1L136.1,253.5L133.9,245.4L136.3,241.0L134.9,233.3L131.9,235.4L124.0,234.4L115.2,236.7L112.2,235.4L117.4,232.3L119.0,228.6L125.8,228.5L129.2,231.2L137.3,226.2L139.7,229.0L144.2,222.0L154.5,221.7L154.4,218.4L157.6,215.0L156.6,213.2L160.5,210.9L163.6,206.6L176.5,207.7L181.6,212.3L182.9,215.6L184.9,215.9L185.6,218.8L188.8,220.3L190.1,218.3L193.4,217.5L195.7,220.8L193.6,227.2L195.7,232.3L194.1,240.2L195.9,244.7L195.0,253.7L212.2,253.8L213.1,255.5L218.8,255.9L220.2,259.5L217.2,264.4L217.6,267.7L220.6,271.5L221.1,276.7L218.3,283.2L214.8,286.1L212.8,292.3L207.2,296.3L202.6,293.3L190.6,294.2L189.6,292.7Z",177.2,258.2,85],"RR":["M234.9,61.7L236.5,78.6L218.0,78.6L212.8,89.3L213.6,93.0L207.1,95.2L204.3,90.7L199.9,89.8L195.0,93.3L193.9,104.2L189.7,103.6L179.7,94.1L182.9,91.4L179.1,83.1L180.1,74.2L179.1,71.0L180.7,69.5L175.2,57.2L176.8,52.4L171.2,50.5L169.9,48.4L166.8,48.3L166.3,44.6L155.9,43.8L156.6,40.0L153.2,32.6L153.4,26.4L146.6,20.6L143.9,15.9L147.2,18.1L154.4,18.4L156.1,21.8L162.0,20.9L164.3,22.3L166.8,20.7L173.9,26.9L176.2,25.1L176.3,19.5L180.8,17.2L185.4,18.6L194.6,16.2L195.3,14.0L198.3,12.2L203.4,12.0L205.0,9.0L208.7,7.0L209.8,5.2L207.4,1.3L217.1,0.7L219.1,4.2L216.5,12.0L223.9,14.1L223.0,16.7L225.6,21.6L221.5,27.5L219.0,40.4L220.5,45.5L223.0,46.7L222.8,53.3L224.6,53.6L223.9,54.7L230.6,60.6Z",187.2,29.2,67.8],"SC":["M379.6,558.3L375.6,555.9L374.1,558.9L372.3,557.7L375.4,553.1L376.3,547.5L379.6,545.5L378.7,543.1L365.4,541.6L358.1,531.8L348.9,525.7L345.4,526.3L344.4,523.9L339.6,521.6L332.7,522.0L323.5,520.2L322.3,518.7L318.5,520.7L315.0,520.3L317.2,515.3L317.9,504.5L322.8,504.2L326.2,506.3L331.2,505.8L340.8,507.8L343.5,510.0L351.5,510.3L352.9,512.2L355.6,510.5L354.7,507.5L356.1,505.1L361.7,504.4L366.4,500.4L375.7,500.2L382.5,503.9L388.8,499.8L397.0,499.6L397.0,503.0L395.5,504.1L393.7,501.1L394.3,505.0L396.6,507.6L395.4,512.2L396.5,519.2L398.5,521.0L396.4,521.4L397.3,532.4L395.9,538.8L394.2,543.5L392.5,540.8L393.8,544.0L392.9,545.7L384.4,552.0L379.6,558.3ZM397.4,531.7L398.1,524.9L399.7,524.2L399.8,527.7L397.4,531.7ZM397.0,507.4L395.1,505.3L397.9,502.9L397.0,507.4Z",356.2,517.4,80],"SP":["M404.8,488.2L403.3,486.3L402.9,481.0L400.0,480.6L398.3,484.2L397.2,483.7L398.6,478.6L397.0,477.3L385.9,477.0L387.1,471.8L381.5,463.1L380.8,453.3L375.2,447.2L362.5,447.5L355.1,443.0L350.1,443.4L342.3,440.8L340.0,442.4L328.9,441.6L325.7,443.9L328.5,440.1L338.0,433.7L342.8,427.3L350.3,408.6L355.2,404.0L358.5,402.9L360.4,399.0L365.9,395.8L376.7,397.9L382.0,397.2L385.9,399.4L387.3,403.8L390.4,401.3L392.2,406.0L393.3,401.3L401.4,400.6L402.4,399.4L405.1,401.3L407.8,400.6L408.4,398.5L414.6,398.3L417.9,401.6L417.2,406.0L420.1,409.4L418.3,413.9L421.9,422.1L425.5,421.4L429.5,423.1L426.9,429.2L426.4,437.2L430.7,440.9L430.0,443.3L432.0,446.6L440.8,446.2L441.6,441.9L447.2,442.7L455.6,438.8L458.7,442.1L465.3,442.0L466.1,443.6L462.9,446.5L457.3,447.7L455.1,452.3L457.2,454.9L454.5,454.5L446.6,459.4L446.5,462.8L439.1,461.8L433.1,466.2L431.5,463.5L430.6,466.1L405.8,483.0L407.8,484.5L404.8,488.2ZM449.2,465.2L446.0,464.3L448.1,461.0L449.5,461.9L449.2,465.2Z",411.7,446.6,101.3],"SE":["M570.2,262.0L567.3,262.8L562.8,260.2L562.4,257.1L558.4,251.8L559.3,249.2L562.1,249.9L565.7,247.8L565.7,239.5L561.7,233.9L562.2,230.6L577.7,237.6L587.1,245.8L580.2,249.5L577.6,252.6L575.4,249.8L577.2,251.2L576.7,253.2L575.4,255.3L573.5,254.1L574.6,257.2L572.0,260.5L572.5,256.7L571.4,261.3Z",576.3,245.9,21.3],"TO":["M433.6,282.1L417.9,286.9L413.6,289.9L411.1,287.0L409.9,290.4L403.4,288.3L403.7,286.0L396.4,286.2L393.7,288.4L389.8,278.4L384.9,287.9L369.2,283.0L370.9,277.0L367.4,283.0L365.6,282.4L363.8,265.6L364.8,263.3L363.3,261.1L365.8,249.2L374.0,227.4L385.7,212.6L388.1,203.4L384.8,199.2L387.6,194.8L387.1,190.0L395.7,185.5L396.7,182.2L399.5,180.7L399.6,177.7L401.7,176.8L402.6,174.1L401.5,171.3L403.9,169.3L400.4,166.0L394.9,165.3L398.1,162.8L407.8,163.7L408.7,165.8L414.2,168.3L416.0,179.6L413.9,190.7L410.2,194.2L414.0,195.4L414.5,199.3L421.6,207.3L428.0,205.0L429.8,206.2L429.7,212.6L424.4,214.0L423.3,219.4L420.4,222.7L423.6,224.1L425.1,228.3L428.9,230.3L427.5,234.3L432.0,240.8L441.1,243.2L432.6,249.9L433.7,252.1L428.4,258.7L430.5,261.6L436.0,263.3L433.0,266.2L436.3,268.3L432.0,272.0L432.3,276.1L434.9,277.7L433.6,281.2Z",400,268.1,71.9]};
+const UF_NOME={AC:'Acre',AL:'Alagoas',AP:'Amapá',AM:'Amazonas',BA:'Bahia',CE:'Ceará',DF:'Distrito Federal',ES:'Espírito Santo',GO:'Goiás',MA:'Maranhão',MT:'Mato Grosso',MS:'Mato Grosso do Sul',MG:'Minas Gerais',PA:'Pará',PB:'Paraíba',PR:'Paraná',PE:'Pernambuco',PI:'Piauí',RJ:'Rio de Janeiro',RN:'Rio Grande do Norte',RS:'Rio Grande do Sul',RO:'Rondônia',RR:'Roraima',SC:'Santa Catarina',SP:'São Paulo',SE:'Sergipe',TO:'Tocantins'};
+const REGIOES=[
+  {n:'Norte',ufs:['AC','AP','AM','PA','RO','RR','TO']},
+  {n:'Nordeste',ufs:['AL','BA','CE','MA','PB','PE','PI','RN','SE']},
+  {n:'Centro-Oeste',ufs:['DF','GO','MT','MS']},
+  {n:'Sudeste',ufs:['ES','MG','RJ','SP']},
+  {n:'Sul',ufs:['PR','RS','SC']},
+];
+const doEstado=uf=>CLUBES_REAIS.filter(c=>c.uf===uf);
+const mapeadosDoEstado=uf=>MAPEADOS.filter(c=>c.uf===uf);
+
+/* seleciona todos os clubes mapeados dos estados pedidos */
+function selecionaUFs(ufs,rotulo){
+  const ids=MAPEADOS.filter(c=>ufs.includes(c.uf)).map(c=>c.id);
+  if(!ids.length) return;
+  SEL=ids.slice(0,MAX_SEL);
+  if(SEL.length<MAX_SEL) SEL=['br',...SEL];
+  ULTIMA_REGIAO=rotulo||null;
+  renderAll();
+}
+let ULTIMA_REGIAO=null;
+
+function renderRegioes(){
+  const box=document.getElementById('regioes');
+  const total=MAPEADOS.length;
+  box.innerHTML=`<button class="reg${ULTIMA_REGIAO==='Todos'?' on':''}" type="button" data-r="Todos">Todos <b>${total}</b></button>`+
+    REGIOES.map(r=>{const n=MAPEADOS.filter(c=>r.ufs.includes(c.uf)).length;
+      return `<button class="reg${ULTIMA_REGIAO===r.n?' on':''}" type="button" data-r="${esc(r.n)}" ${n?'':'disabled'}>${esc(r.n)} <b>${n}</b></button>`;}).join('');
+  box.querySelectorAll('.reg').forEach(b=>b.onclick=()=>{
+    const r=b.dataset.r;
+    if(r==='Todos'){SEL=PUBLICADOS.slice(0,MAX_SEL).map(c=>c.id);ULTIMA_REGIAO='Todos';renderAll();return;}
+    selecionaUFs(REGIOES.find(x=>x.n===r).ufs,r);
   });
-  const raio=n>4?23:28, corDe=c=>'var('+(c.serie||'--s1')+')';
-  let h='';
-  [[104,266],[316,266]].forEach(([x,y])=>{h+=`<path class="tent-soon" d="M${cx} ${cy+34} C ${cx} ${cy+58}, ${x} ${cy+38}, ${x} ${y-12}"/><circle cx="${x}" cy="${y}" r="11" fill="none" stroke="var(--axis)" stroke-dasharray="3 4"/>`;});
-  lista.forEach((c,i)=>{const [x,y]=pos[i];
-    h+=`<path class="tent" stroke="${corDe(c)}" d="M${cx} ${cy} C ${cx+(x-cx)*.15} ${cy-28}, ${x} ${cy-18}, ${x} ${y+raio+3}"/>`;});
-  h+=`<circle cx="${cx}" cy="${cy}" r="34" fill="var(--surface-2)" stroke="var(--border-2)" stroke-width="1.5"/>`;
-  h+=`<g transform="translate(${cx-16} ${cy-15})"><rect x="0" y="12" width="8" height="18" rx="2" fill="var(--s1)"/><rect x="12" y="0" width="8" height="30" rx="2" fill="var(--s2)"/><rect x="24" y="7" width="8" height="23" rx="2" fill="var(--s3)"/></g>`;
-  lista.forEach((c,i)=>{const [x,y]=pos[i], rl=raio-8;
-    h+=`<a href="${c.url}" aria-label="Abrir painel do ${esc(c.nome)}"><circle cx="${x}" cy="${y}" r="${raio}" fill="var(--surface)" stroke="${corDe(c)}" stroke-width="2"/><image href="${LOGOS[c.id]}" x="${x-rl}" y="${y-rl}" width="${rl*2}" height="${rl*2}"/></a>`;
-    /* com muitos clubes os escudos falam por si e os nomes sairiam uns por cima dos outros */
-    if(n<=4) h+=`<text x="${x}" y="${y-raio-9}" text-anchor="middle">${esc(c.nome.toUpperCase())}</text>`;});
-  svg.innerHTML=h;
 }
 
-/* ---------- fila de escudos ---------- */
-function renderTrilho(){
-  const box=document.getElementById('trilho');
-  box.innerHTML=CLUBES.map((c,idx)=>{
+/* estados estreitos demais para caber a sigla dentro, com a etiqueta puxada para fora */
+const UF_FORA={RN:[628,166],PB:[630,196],AL:[626,230],SE:[624,256],ES:[578,410],RJ:[566,454],DF:[452,354]};
+
+function renderMapa(){
+  const svg=document.getElementById('mapa');
+  const ufsSel=new Set(sel().filter(c=>!c.agregado).map(c=>c.uf));
+  const regiaoAtiva=REGIOES.find(r=>r.n===ULTIMA_REGIAO);
+  let formas='', rotulos='';
+  for(const uf in UF_GEO){
+    const [d,cx,cy,larg]=UF_GEO[uf];
+    const todos=doEstado(uf), mapeados=mapeadosDoEstado(uf);
+    const classe=mapeados.length?('tem f'+Math.min(mapeados.length,3)):(todos.length?'fp':'f0');
+    const marcado=ufsSel.has(uf)?' sel':'';
+    const apaga=regiaoAtiva&&!regiaoAtiva.ufs.includes(uf)?' apaga':'';
+    formas+=`<path class="uf ${classe}${marcado}${apaga}" d="${d}" data-uf="${uf}" ${mapeados.length?'tabindex="0" role="button"':''} aria-label="${esc(UF_NOME[uf])}"/>`;
+    if(!todos.length) continue;
+    const fora=larg<56?UF_FORA[uf]:null;
+    const lx=fora?fora[0]:cx, ly=fora?fora[1]:cy;
+    const claro=mapeados.length>=3&&!fora?' claro':'';
+    rotulos+=`<g class="rot${apaga}">`;
+    if(fora) rotulos+=`<line x1="${cx}" y1="${cy}" x2="${lx-13}" y2="${ly-5}" stroke="var(--border-2)" stroke-width="1.4"/>`;
+    rotulos+=`<text class="${claro.trim()}" x="${lx}" y="${ly+6}" text-anchor="middle">${uf}</text>`;
+    if(mapeados.length) rotulos+=`<circle cx="${lx+24}" cy="${ly-8}" r="10"/><text class="qtd" x="${lx+24}" y="${ly-3}" text-anchor="middle">${mapeados.length}</text>`;
+    rotulos+=`</g>`;
+  }
+  svg.innerHTML=formas+rotulos;
+  let larguraMapa=620;
+  for(const uf in UF_GEO) if(UF_GEO[uf][3]<56&&UF_FORA[uf]&&doEstado(uf).length) larguraMapa=Math.max(larguraMapa,UF_FORA[uf][0]+42);
+  svg.setAttribute('viewBox','-4 -4 '+(larguraMapa+4)+' 650');
+  svg.querySelectorAll('path.uf').forEach(g=>{
+    const uf=g.dataset.uf, mapeados=mapeadosDoEstado(uf), todos=doEstado(uf);
+    if(mapeados.length){
+      const abre=()=>selecionaUFs([uf],null);
+      g.onclick=abre;
+      g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();abre();}};
+    }
+    g.onmousemove=e=>{
+      const i=ANOS.indexOf(ANO);
+      const rec=mapeados.reduce((s,c)=>s+(DATA[c.id].receitaTotal[i]||0),0);
+      const linhas=mapeados.length
+        ? `<div class="r"><span>Clubes mapeados</span><b>${mapeados.map(c=>c.nome).join(', ')}</b></div><div class="r"><span>Receita somada ${ANO}</span><b>${curto(rec)}</b></div>`
+        : (todos.length?`<div class="r"><span>No projeto, ainda sem dados</span><b>${todos.map(c=>c.nome).join(', ')}</b></div>`
+                       :`<div class="r"><span>Sem clube no projeto</span></div>`);
+      showTip(`<div class="t">${esc(UF_NOME[uf])}</div>`+linhas,e.clientX,e.clientY);
+    };
+    g.onmouseleave=hideTip;
+  });
+}
+
+/* ---------- escudos agrupados por estado ---------- */
+function renderBlocos(){
+  const box=document.getElementById('blocos');
+  const ordem=[];REGIOES.forEach(r=>r.ufs.forEach(u=>ordem.push(u)));
+  const porUF={};
+  CLUBES_REAIS.forEach(c=>{(porUF[c.uf]=porUF[c.uf]||[]).push(c);});
+  const botao=c=>{
     const i=SEL.indexOf(c.id), on=i>=0;
     const cor=on?'var('+(c.serie||SERIES[i%SERIES.length])+')':'transparent';
     const estado=c.agregado?'soma dos clubes mapeados':(c.dados?'mapeado, '+esc(c.uf):'em mapeamento');
-    return (idx===1?'<span class="sep" aria-hidden="true"></span>':'')+
-    `<button type="button" class="club${on?' on':''}${c.dados?'':' off'}" data-id="${c.id}" data-nome="${esc(c.nome)}" data-estado="${estado}" style="--cor:${cor}"
-      aria-pressed="${on}" aria-label="${esc(c.nome)}, ${estado}" ${c.dados?'':'disabled aria-disabled="true"'}>${crestHTML(c,true)}</button>`;}).join('');
+    return `<button type="button" class="club${on?' on':''}${c.dados?'':' off'}" data-id="${c.id}" data-nome="${esc(c.nome)}" data-estado="${estado}" style="--cor:${cor}"
+      aria-pressed="${on}" aria-label="${esc(c.nome)}, ${estado}" ${c.dados?'':'disabled aria-disabled="true"'}>${crestHTML(c,true)}</button>`;
+  };
+  let h=`<div class="bloco-uf"><span class="cab">Agregado</span><div class="fila">${botao(POR_ID.br)}</div></div>`;
+  ordem.filter(u=>porUF[u]).forEach(uf=>{
+    const lista=porUF[uf], n=lista.filter(c=>c.dados).length;
+    h+=`<div class="bloco-uf"><span class="cab">${uf}${n?' · '+n:''}</span><div class="fila">${lista.map(botao).join('')}</div></div>`;
+  });
+  box.innerHTML=h;
   box.querySelectorAll('.club').forEach(b=>{
-    if(!b.disabled) b.onclick=()=>alterna(b.dataset.id);
+    if(!b.disabled) b.onclick=()=>{ULTIMA_REGIAO=null;alterna(b.dataset.id);};
     b.onmousemove=e=>showTip(`<div class="t">${b.dataset.nome}</div><div class="r"><span>${b.dataset.estado}</span></div>`,e.clientX,e.clientY);
     b.onmouseleave=hideTip;
   });
-  box.classList.toggle('cabe',box.scrollWidth<=box.clientWidth+1);
   const n=SEL.length;
   document.getElementById('conta').innerHTML=`<b>${n}</b> de ${MAX_SEL} ${n===1?'selecionado':'selecionados'} · <b>${MAPEADOS.length}</b> clubes mapeados de ${CLUBES_REAIS.length}`;
   document.getElementById('chipMapa').textContent=CLUBES_REAIS.length+' clubes no mapa';
   document.getElementById('chipProntos').textContent=MAPEADOS.length+' com painel publicado';
+}
+
+/* ---------- resumo da seleção e panorama do topo ---------- */
+function renderResumoSel(){
+  const i=ANOS.indexOf(ANO), lista=sel().filter(c=>!c.agregado);
+  const box=document.getElementById('resumoSel');
+  if(!lista.length){box.innerHTML='<div><span>Seleção</span><strong>-</strong><em>Escolha um clube no mapa ou na lista</em></div>';return;}
+  const soma=k=>lista.reduce((s,c)=>s+(DATA[c.id][k][i]||0),0);
+  const rec=soma('receitaTotal'), dev=soma('passivoTotal'), res=soma('superavit');
+  const anos=rec?dev/rec:null;
+  box.innerHTML=`
+    <div><span>Clubes na seleção</span><strong>${lista.length}</strong><em>${lista.map(c=>c.sigla).join(' · ')}</em></div>
+    <div><span>Receita somada ${ANO}</span><strong class="num">${curto(rec)}</strong><em>${anos?nf1.format(anos)+(anos>=2?' anos':' ano')+' de receita para quitar a dívida':''}</em></div>
+    <div><span>Dívida somada</span><strong class="num">${curto(dev)}</strong><em>Circulante mais não circulante</em></div>
+    <div><span>Resultado somado</span><strong class="num">${curto(res)}</strong><em>${res>=0?'Sobrou no ano':'Faltou no ano'}</em></div>`;
+}
+
+/* barras de receita dos clubes escolhidos, para ocupar a coluna ao lado do mapa */
+function renderRanking(){
+  const i=ANOS.indexOf(ANO), box=document.getElementById('ranking');
+  const lista=sel().filter(c=>!c.agregado&&DATA[c.id]&&DATA[c.id].receitaTotal[i]!=null)
+    .map(c=>({c,v:DATA[c.id].receitaTotal[i]||0})).sort((a,b)=>b.v-a.v);
+  if(!lista.length){box.innerHTML='';return;}
+  const topo=Math.max(...lista.map(x=>x.v))||1;
+  box.innerHTML=`<h4>Receita de cada clube escolhido em ${ANO}</h4>`+lista.map(({c,v},k)=>{
+    const cor=c.serie||SERIES[k%SERIES.length];
+    return `<div class="rank-l"><b>${esc(c.sigla)}</b><i class="rank-bar" style="width:${Math.max(2,v/topo*100)}%;background:var(${cor})"></i><span class="v num">${curto(v)}</span></div>`;
+  }).join('');
+}
+
+function renderHeroKpis(){
+  const i=ANOS.indexOf(ANO), D=DATA.br;
+  const bloco=(rot,val,sub)=>`<div class="hero-kpi"><span>${rot}</span><strong class="num">${val}</strong><em>${sub}</em></div>`;
+  document.getElementById('heroKpis').innerHTML=
+    bloco('Receita dos mapeados',curto(D.receitaTotal[i]),`Soma dos ${MAPEADOS.length} clubes em ${ANO}`)+
+    bloco('Dívida somada',curto(D.passivoTotal[i]),fmt(D.passivoSobreReceita[i],'x')+' vezes a receita do ano')+
+    bloco('Resultado somado',curto(D.superavit[i]),D.superavit[i]>=0?'Sobrou no ano':'Faltou no ano')+
+    bloco('Peso da folha',fmt(D.wageRatio[i],'pct'),'Da receita operacional somada');
 }
 
 /* ---------- visão simples ---------- */
@@ -813,7 +1009,7 @@ function renderEvol(){
 }
 
 function renderAll(){
-  renderTrilho();
+  renderBlocos();renderMapa();renderRegioes();renderHeroKpis();renderRanking();renderResumoSel();
   montaAnos(document.getElementById('anosSimples'),'ano');
   renderSimples();
   montaAnos(document.getElementById('anos'),'ano');
@@ -825,8 +1021,8 @@ function renderAll(){
   mixChart(document.getElementById('chMix'),sel());
 }
 
-document.getElementById('acTodos').onclick=()=>{SEL=PUBLICADOS.slice(0,MAX_SEL).map(c=>c.id);renderAll();};
-document.getElementById('acLimpar').onclick=()=>{SEL=[];renderAll();};
+document.getElementById('acTodos').onclick=()=>{SEL=PUBLICADOS.slice(0,MAX_SEL).map(c=>c.id);ULTIMA_REGIAO='Todos';renderAll();};
+document.getElementById('acLimpar').onclick=()=>{SEL=[];ULTIMA_REGIAO=null;renderAll();};
 /* alterna entre a visão completa e a simples */
 const btnModo=document.getElementById('btnModo');
 function aplicaModo(simples){
@@ -848,7 +1044,6 @@ const links=[...document.querySelectorAll('.nav a')];
 const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)links.forEach(l=>l.classList.toggle('on',l.dataset.sec===e.target.id));});},{rootMargin:'-45% 0px -50% 0px'});
 ['clubes','comparativo','metodologia'].forEach(id=>obs.observe(document.getElementById(id)));
 let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{document.body.classList.contains('simples')?renderEvolSimples():renderEvol();},120);});
-renderPolvo();
 montaSelect(document.getElementById('selMetric'),k=>{METRICA=k;marcaLinhaAtiva();renderEvol();});
 montaSelect(document.getElementById('selMetricS'),k=>{METRICA_S=k;marcaLinhaAtiva(METRICA_S,'#quadroSimples');renderEvolSimples();},METRICAS_SIMPLES,METRICA_S);
 renderAll();aplicaModo(modoInicial);
